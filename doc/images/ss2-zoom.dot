@@ -1,0 +1,18 @@
+digraph G {
+	start -> 1 [color=blue];
+	start -> 2 [style=dotted];
+	start -> 3 [style=dotted];
+	1 -> 11 [color=blue];
+	1 -> 12 [style=dotted];
+	1 -> 13 [style=dotted];
+	11 -> 111 [color=blue];
+	11 -> 112 [color=blue];
+	11 -> 113 [style=dotted];
+	111 -> 1111 [style=dotted];
+	111 -> 1112 [style=dotted];
+	111 -> 1113 [style=dotted];
+	112 -> 1121 [color=blue];
+	112 -> 1122 [color=blue];
+	112 -> 1123 [color=blue];
+	113 -> 1131 [style=dotted];
+}
