@@ -1,0 +1,36 @@
+
+Slot 1 : 
+Subjects : 
+	b1	b4	b6
+Lectures : 
+mon 900 - mon 1000
+wed 800 - wed 900
+fri 800 - fri 900
+Unavailable for :
+mon 830 - mon 900
+mon 1000 - mon 1100
+mon 1230 - mon 1200
+tue 1000 - tue 1100
+wed 1000 - wed 1100
+
+Slot 2 : 
+Subjects : 
+	b2
+Lectures : 
+mon 1030 - mon 1200
+wed 900 - wed 1030
+fri 900 - fri 1030
+Unavailable for :
+mon 1000 - mon 1030
+tue 1000 - tue 1100
+
+Slot 3 : 
+Subjects : 
+	b3
+Lectures : 
+mon 800 - mon 900
+wed 1100 - wed 1200
+fri 1030 - fri 1130
+Unavailable for :
+tue 1000 - tue 1100
+wed 1000 - wed 1100

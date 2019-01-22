@@ -1,0 +1,1919 @@
+#ifndef DEPGRAPH_H
+#define DEPGRAPH_H
+
+#include "Subject.h"
+#include "DepGraph.h"
+
+class Node
+{
+	public:
+		int Colour;
+		Subject *subject;
+};
+
+class DepGraph
+{
+private:
+	bool **array; //contains the dependence status of the nodes
+	int size;
+	int MaxColour; //Maximum number of colours required to colour the 
+			//graph
+	bool IsColoured;
+	
+public:
+	vector <Node> Nodes;
+	
+	DepGraph();
+	void buildGraph(vector <Subject>&);
+	~DepGraph();
+	void print();	
+	int colour();
+	bool isColoured(){	return IsColoured;	}
+	int getMaxColour(){	return MaxColour;	}
+};
+#endif
+#ifndef GLOBAL_H
+#define GLOBAL_H
+
+#include <stdio.h>
+#include <vector>
+#include "Participant.h"
+#include "Subject.h"
+
+enum 
+{
+	MON = 1,
+	TUE,
+	WED,
+	THU,
+	FRI,
+
+	ERROR,
+	NUMBER,
+	ID	
+};
+
+extern FILE *fin;
+
+extern vector <Participant> Participants;
+extern vector <Subject> Subjects;
+
+
+extern string input_string;
+extern float input_number;
+//Prototypes of top-level global functions
+void loadParticipants();
+void loadSubjects();
+void creatAssoc();
+void cleanup();
+#endif
+#ifndef PARTICIPANT_H
+#define PARTICIPANT_H
+using namespace std;
+#include <string>
+#include <vector>
+#include "Period.h"
+
+using namespace std;
+
+class Participant
+{
+private:
+	string Id;
+	vector <string> subjects; //only the list of subject ids
+	Period Unavailable; //the period for which this participant is 
+				//unavailable.
+public:
+	Participant() : Id("a1"){}
+	~Participant();
+	Participant(string aId) : Id(aId){}
+	string& getId(){	return Id;	}
+	vector<string>& getSubjects(){	return subjects;	}
+	void addSubject(string& s){	subjects.push_back(s);	}
+	void makeUnavailable(Duration&);
+	Period& getUnavailable(){	return Unavailable;	}
+	void print();
+};
+
+#endif
+#ifndef PERIOD_H
+#define PERIOD_H
+#include<iostream>
+#include <vector>
+
+using namespace std;
+class Duration
+{
+public:
+	float Start;
+	float End;
+	
+	Duration(float s = 0, float e = 0) : Start(s), End(e){};
+	bool isContained(float f)
+	{	return ((f > Start) && (f < End));	}
+
+	bool isOverlap(Duration d);
+
+	bool operator == (Duration ad){ return ((ad.Start == Start) && 
+		(ad.End == End));	}
+};
+
+ostream& operator << (ostream&, const Duration&);
+
+class Period
+{
+private:
+	friend ostream& operator << (ostream&, const Period&);
+	vector <Duration> durations;
+
+public:
+	~Period();
+	void addDuration(Duration d);
+	Period& operator || (Period&);
+	bool isFree(Duration);
+	Duration getNextFree(Duration); //the next duration of the same length
+			//as the argument which is not inside this
+};
+
+ostream& operator << (ostream&, const Period&);
+#endif
+#ifndef SCHEDULE_H
+#define SCHEDULE_H
+
+#include <string>
+#include "Period.h"
+#include "DepGraph.h"
+class Slot
+{
+public:
+	
+	vector<string> subjects;
+	Duration duration;
+	Period Unavailable;
+
+	vector<Duration> Lectures;
+
+	~Slot(){	subjects.clear(); Lectures.clear();	}
+	bool isAvailable(Duration d){	return Unavailable.isFree(d);	}	
+	Duration getNextAvailable(Duration);
+	float getNoOfHours(){ return duration.End - duration.Start;	}
+	float schedule(Duration d);
+	void addSubject(string s){	subjects.push_back(s);	}
+	void addUnavailable(Duration d){	Unavailable.addDuration(d);	}
+	void addLectureSlot(Duration d){	Lectures.push_back(d);	}
+};
+
+ostream& operator << (ostream&, const Slot&);
+
+class Schedule
+{
+private:
+	friend ostream& operator << (ostream&, const Schedule&);
+	
+	int Id;
+	vector<Slot> theSchedule;
+	
+	
+	bool for2Days(Slot &, int);
+	Period Busy;
+
+public: 
+	Schedule();
+	Schedule(int aId) : Id(aId){}
+	~Schedule(){	theSchedule.clear();	}
+	void addBusy(Duration);
+	bool isFree(Duration d){	return Busy.isFree(d);	}
+	void makeSchedule(DepGraph &);
+private:
+	void for4_5(Slot &);
+	void for3_0(Slot &);
+	bool for3_0_Mon_Wed_Fri(Slot &);
+	bool for3_0_Tue_Thu(Slot &);
+	bool for3_0_Mon_Fri(Slot &);
+	bool for3_0_Mon_Wed(Slot &);
+
+	void for2_0(Slot &);
+	bool for2_0_Tue_Thu(Slot &);
+	bool for2_0_Mon_Fri(Slot &);
+	bool for2_0_Mon_Wed(Slot &);
+
+	void for3Days(Slot &);
+public:
+	Schedule& operator = (const Schedule&);
+	
+	int getId(){	return Id;	}
+
+//interface with UI
+	int load(string);
+private:
+//for parsing schedule file
+	int token;
+	void parseSlotList();
+	void parseSlot();
+	void parseSubList(Slot&);
+	void parseLectureList(Slot&);
+	void parseUnavailableList(Slot&);
+	void parseLecture(Slot&);
+	void parseUnavailable(Slot&);
+};
+
+ostream& operator << (ostream&, const Schedule&);
+#endif
+#ifndef SUBJECT_H
+#define SUBJECT_H
+
+#include <string>
+#include <vector>
+
+#include "Period.h"
+#include "Participant.h"
+
+class Participant;
+
+class Subject
+{
+private:
+	string Id;
+	vector <Participant> participants;
+	float Hours;	//2, 3 or 4.5 hours a week
+	Period Unavailable; //the period for which this subject is going
+			//to be unavailable 
+public:
+	Subject() : Id("b1"){}
+	Subject(string aId) : Id(aId){}
+	Subject(string aId, float aHour) : Id(aId), Hours(aHour){};
+	string getId(){	return Id;	}
+	float getHours(){	return Hours;	}
+	int getNoOfParticipants(){	return participants.size();	}
+	void addParticipant(Participant&);
+	vector <Participant> getParticipants(){	return participants;	}
+	Period& getUnavailable(){	return Unavailable;	}
+	void print();
+};
+#endif
+#ifndef TIMER_H
+#define TIMER_H
+
+#include <vector>
+#include "Period.h"
+
+/*This class Timer is intended to encapsulate all the information about the 
+ * timing
+ * of the business in the institute. The rest of the entities work with time as
+ * just number lines. This module houses the rules that will be used to convert
+ * these numbers back and forth to the time representation. The main reason for
+ * having this class is that we thus incorporate a lot of flexibility in 
+ * deciding the institute timings. All that business knowledge is centralised
+ * here in this class.
+*/
+
+class Time
+{
+public:
+	int WeekDay;
+	int Hour;
+	Time(int w = 1, int h = 800) : WeekDay(w), Hour(h){}
+};
+
+ostream& operator << (ostream&, const Time&);
+
+class TimeDuration
+{
+public:
+	int time;
+	float length;
+	TimeDuration(){}
+	TimeDuration(int t, float l) : time(t), length(l){};
+};
+
+class FloatDuration
+{
+public:
+	float Start;
+	float Length;
+}; 
+
+class Timer
+{
+private:
+	static float HoursPerDay; //Number of working hours per day, lunch time not
+				//counted.
+	static int StartOfDay;
+	static int EndOfDay;
+	static TimeDuration Lunchbreak;
+	static vector<FloatDuration> breaks;	//List of break durations
+	static void init();
+	static bool Initialised;	
+public:
+	Timer();
+	static float TimeToFloat(Time);
+	static Time FloatToTime(float);
+	static Time FloatToTime(float, bool);
+	static bool isContiguous(Duration);
+	static Duration getNextContiguous(Duration);
+	static Duration getPrevContiguous(Duration); 
+	static float getStartOfDay(int ad){ return (ad - 1) * HoursPerDay;	}
+	static float getEndOfDay(int ad){	return ad * HoursPerDay;	}
+};
+
+#endif
+#include <iostream>
+#include "DepGraph.h"
+#include "Global.h"
+
+using namespace std;
+DepGraph::DepGraph()
+{
+	size = 0;
+}
+
+void DepGraph::buildGraph(vector<Subject>& s)
+{
+
+/*
+	for each subject
+		check all the previous subjects in Subjects
+		if there is any subjects shared by these two subjects
+			make the corresponding array elements true
+	end for
+*/
+
+	//build the dependency graph rightaway
+	size = s.size();
+	array = new bool * [size];
+
+	for (int i = 0; i < size; i++)
+	{
+		array[i] = new bool [size];
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = i + 1; j < size; j++)
+		{
+			for (int k = 0; 
+			k < Subjects[i].getParticipants().size(); k++)
+			{
+				for (int l = 0; 
+				l < Subjects[j].getParticipants().size(); l++)
+				{
+					if(Subjects[i].getParticipants()[k].
+							getId() == 
+					Subjects[j].getParticipants()[l].getId())
+					{
+						array[i][j] = true;
+						array[j][i] = true;
+						break;
+					}
+				}
+				if(array[i][j] == true)
+				{
+					break;
+				}
+			}
+		}
+	}
+
+	Nodes = vector<Node> (size);
+	for (int i = 0; i < size; i++)
+	{
+		Nodes[i].Colour = 0;
+		Nodes[i].subject = &s[i];
+	}
+}
+
+DepGraph::~DepGraph()
+{
+	for (int i = 0; i < size; i++)
+	{
+		delete[] array[i];
+	}
+	if (size != 0)
+	{
+		delete[] array;
+	}
+}
+
+void DepGraph::print()
+{
+	cout << "dependency graph size : " << size << " X " << size 
+		<< "!" << endl;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			cout << "[" << i << "][" << j << "] = " ;
+			if (array [i][j] == true)
+			{
+				cout << "true" << endl;
+			}
+			else
+			{
+				cout << "false" << endl;
+			}
+		}
+	}
+}	
+
+int DepGraph::colour()
+{
+/*
+ * for each node
+ * 	if there is there exists any colour from 1 to MaxColour that is not
+ * 	used by any of the neighbours
+ * 		assign that colour
+ * 	else
+ * 		assign MaxColour + 1 to the current node
+ * 		MaxColour++
+ * end for
+ */
+	MaxColour = 1;
+	for(int i = 0; i < size; i++)
+	{
+		int j;
+		for (j = 1; j <= MaxColour; j++)
+		{
+			int k;
+			for (k = 0; k < i; k++)
+			{
+				if (array[k][i] == true && 
+					Nodes[k].Colour == j)
+				{
+					break;
+				}
+			}
+			if(k == i)
+			{
+				Nodes[i].Colour = j;
+				break;
+			}
+			else
+			{
+				continue;
+			}
+		}		
+		if(j >= MaxColour)
+		{
+			Nodes[i].Colour = MaxColour = j;
+		} 	
+	}
+	IsColoured = true;
+	return MaxColour;
+}
+#include <fstream>
+#include <stdlib.h>
+
+#include "Schedule.h"
+#include "Global.h"
+vector <Participant> Participants;
+vector <Subject> Subjects;
+
+FILE *fin;
+extern int yylex();
+void loadParticipants()
+{
+	void parseParticipant();
+	system("cat *.p > Participant.dat");
+	parseParticipant();
+}
+
+void loadSubjects()
+{
+	if((fin = fopen("Subject.dat", "r")) == 0)
+	{
+		cout << "Couldn't read Subject.dat!" << endl;
+		exit (1);
+	}
+	while(yylex() == ID)
+	{
+		string id = input_string;
+		float hours;
+		if(yylex() == NUMBER)
+		{
+			hours = input_number;
+		}
+	
+		else
+		{
+			cout << "Error in Subject.dat" << endl;
+		}	
+		Subject *s = new Subject(id, hours);
+		Subjects.push_back(*s);
+	}
+	fclose(fin);
+}
+
+void creatAssoc()
+{
+	for (int i = 0; i < Participants.size(); i++)
+	{
+		vector<string> subject_list = Participants[i].getSubjects();
+		for (int j = 0; j < subject_list.size(); j++)
+		{
+			for(int k = 0; k < Subjects.size(); k++)
+			{
+				if(subject_list[j] == Subjects[k].getId())
+				{
+					Subjects[k].addParticipant
+						(Participants[i]);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void cleanup()
+{
+	Participants.clear();
+	Subjects.clear();
+}
+#include "Timer.h"
+#include "Period.h"
+#include <vector>
+
+ostream& operator << (ostream& o, const Duration& d)
+{
+	o << Timer::FloatToTime(d.Start, true);
+	o << " - " << Timer::FloatToTime(d.End, false) << endl;
+	return o;
+}
+
+bool Duration::isOverlap(Duration d)
+{
+	if ((d.Start >= Start && d.Start < End) ||
+			Start >= d.Start && Start < d.End)
+       	{
+		return true;
+	}
+	return false;
+}
+struct Dur
+{
+	float Inst;
+	bool isStart;
+};
+typedef struct Dur Dur;
+
+Period::~Period()
+{
+	durations.clear();
+}
+void Period::addDuration(Duration d)
+{	
+	for (int i = 0; i < durations.size(); i++)
+	{
+		if (d == durations[i])
+		{
+			return;
+		}
+	}
+	durations.push_back(d);	
+}
+
+Period& Period::operator || (Period& P)
+{
+/*	create a vector v that contains all the Starts and Ends of all the
+ *	durations in both this and P. The list is formed in a sorted manner.
+ *	Each element of v also contains if it is a Start or End in any
+ *	of the Durations of the two Periods.
+ *
+ *	Now scan v. Keep a counter (Level) such that Level increments on
+ *	seeing a start and decrements on seeing an End.
+ *
+ *	Wherever Level changes from 0 -> 1 marks the Start of one Duration
+ *	of the resulting Period.
+ *	Wherever Level changes from 1 -> 0 marks the End of one Duration of 
+ *	the resulting Period.
+ *
+ *	There are four three conditions
+ *	all of this's points have been added to v.
+ *	all of P's points have been added to v.
+ *	Some points of both remain to be added. 
+ *	As per above three we see the three conditions below.
+ *	
+ */
+	vector<Dur> v;
+
+	int d1 = 0, d2 = 0;
+	bool isS1 = true;
+	bool isS2 = true;
+
+	float f1, f2;
+
+	while (d1 < durations.size() || d2 < P.durations.size())
+	{
+		Dur *D;
+		if(d1 == durations.size() && isS1 == true)
+		{
+			D = new Dur;
+			if(isS2 == true)
+			{
+				D->Inst = P.durations[d2].Start;
+				D->isStart = true;
+				isS2 = false;
+			}
+			else
+			{
+				D->Inst = P.durations[d2].End;
+				D->isStart = false;
+				isS2 = true;
+				d2++;
+			}
+			v.push_back(*D);
+			continue;
+		}
+		else if(d2 == P.durations.size() && isS2 == true)
+		{
+			D = new Dur;
+			if(isS1 == true)
+			{
+				D->Inst = durations[d1].Start;
+				D->isStart = true;
+				isS1 = false;
+			}
+			else
+			{
+				D->Inst = durations[d1].End;
+				D->isStart = false;
+				isS1 = true;
+				d1++;
+			}
+			v.push_back(*D);
+			continue;
+		}
+		f1 = (isS1 == true)? durations[d1].Start : durations[d1].End;
+		f2 = (isS2 == true)? 
+			P.durations[d2].Start : P.durations[d2].End;
+
+		if(f1 <= f2)
+		{
+			if(isS1 == true)
+			{
+				D = new Dur;
+				D->Inst = f1;
+				D->isStart = true;				
+				isS1 = false;
+			}
+			else
+			{
+				D = new Dur;
+				D->Inst = f1;
+				D->isStart = false;
+				isS1 = true; d1++;
+			}
+		}	
+		else
+		{
+			if(isS2 == true)
+			{
+				D = new Dur;
+				D->Inst = f2;
+				D->isStart = true;				
+				isS2 = false;
+			}
+			else
+			{
+				D = new Dur;
+				D->Inst = f2;
+				D->isStart = false;
+				isS2 = true; d2++;
+			}
+		}
+		v.push_back(*D);
+	}
+
+	Period *p = new Period;
+	int Level = 0;
+	Duration *dn;
+	for (int i = 0; i < v.size(); i++)
+	{
+		if(v[i].isStart == true)
+		{
+			if(Level++ == 0)
+			{
+				dn = new Duration;
+				dn->Start = v[i].Inst;
+			}
+		}
+		else
+		{
+			if(--Level == 0)
+			{
+				dn->End = v[i].Inst;
+				p->addDuration(*dn);
+			}
+		}
+	}
+	return *p;
+}
+
+bool Period::isFree(Duration d)
+{
+	for (int i = 0; i < durations.size(); i++)
+	{
+		if (durations[i].isOverlap(d))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+Duration Period::getNextFree(Duration ad)
+{
+	Duration d = ad;
+	for (int i = 0; i < durations.size(); i++)
+	{
+		if(durations[i].isOverlap(d))
+		{
+			d.End += durations[i].End - d.Start;
+			d.Start = durations[i].End;
+		}
+	}
+	return d;
+}
+
+ostream& operator << (ostream& o, const Period& p)
+{
+	for (int i = 0; i < p.durations.size(); i++)
+	{
+		o << p.durations[i];
+	}
+	return o;
+}
+#include "Subject.h"
+
+void Subject::addParticipant(Participant& p)
+{	
+	participants.push_back(p);	
+
+	Unavailable = Unavailable || p.getUnavailable();
+}
+
+void Subject::print()
+{
+	cout << "subjectID : "<< Id << "." << endl;
+	if(participants.size() > 0)
+	{
+		cout << "Participants : ";
+		for (int i = 0; i < participants.size(); i++)
+		{
+			cout << participants[i].getId() << '\t';
+		}
+	
+		cout << "I am unavailable for the following:" << endl;
+		cout << Unavailable;
+	}	
+
+}	
+#include "Participant.h"
+
+Participant::~Participant()
+{
+
+}
+
+void Participant::makeUnavailable(Duration& d)
+{	
+	Unavailable.addDuration(d);	
+}
+
+void Participant::print()
+{
+	cout << "I am a participant." << endl;
+	cout << "My Id is " << Id << "." << endl;
+	if(subjects.size() > 0)
+	{
+		cout << "Subjects are : ";
+		for (int i = 0; i < subjects.size(); i++)
+		{
+			cout << subjects[i] << '\t';
+		}
+		cout << endl << endl;
+	}
+	cout << "I am unavailable for : " << endl;
+	cout << Unavailable;
+}
+#include <stdlib.h>
+
+#include "Schedule.h"
+#include "Global.h"
+#include "Timer.h"
+
+Duration Slot::getNextAvailable(Duration ad)
+{
+	return Unavailable.getNextFree(ad);
+}
+
+float Slot::schedule(Duration d)
+{
+	duration = d;
+}
+
+ostream& operator << (ostream& o, const Slot& s)
+{
+	o << "Subjects : " << endl;
+	for (int j = 0; j < s.subjects.size(); j++)
+	{
+		o << '\t' << s.subjects[j];
+	}
+	o << endl;
+
+	o << "Lectures : " << endl ;
+	for (int i = 0; i < s.Lectures.size(); i++)
+	{
+		o << s.Lectures[i];
+	}
+	o << "Unavailable for :" << endl;
+	o << s.Unavailable;
+	return o;
+}
+
+Schedule::Schedule()
+{
+	Id = -1;
+}
+
+void Schedule::makeSchedule(DepGraph &G)
+{
+	//form the slots with subjects allocated to them.
+	//shift the slots to maintain availability constraints
+	//shift to maintain the continuity constraints
+	//done	
+	theSchedule = vector <Slot> (G.getMaxColour());
+	for (int i = 0; i < theSchedule.size(); i++)
+	{
+		Slot *s = new Slot();
+		theSchedule[i] = *s;
+	}
+
+	for (int i = 0; i < G.Nodes.size(); i++)
+	{
+		if(G.Nodes[i].subject->getNoOfParticipants())
+		{
+			theSchedule[G.Nodes[i].Colour - 1].
+				subjects.push_back(G.Nodes[i].subject->getId());
+			theSchedule[G.Nodes[i].Colour - 1].
+				Unavailable = 
+				theSchedule[G.Nodes[i].Colour - 1].
+				Unavailable || G.Nodes[i].subject->getUnavailable();
+			if (G.Nodes[i].subject->getHours() > 
+					theSchedule[i].duration.End)
+			{
+				theSchedule[i].duration.Start = 0;
+				theSchedule[i].duration.End = 
+					G.Nodes[i].subject->getHours();
+			}
+		}
+	}
+
+	for (int i = 0; i < theSchedule.size(); i++)
+	{
+		if(theSchedule[i].getNoOfHours() == 4.5)
+		{
+			for4_5(theSchedule[i]);
+		}
+		else if (theSchedule[i].getNoOfHours() == 3.0)
+		{
+			for3_0(theSchedule[i]);
+		}
+		else
+		{
+			for2_0(theSchedule[i]);
+		}
+	}
+}
+
+void Schedule::for4_5(Slot &s)
+{
+	for3Days(s);
+}
+
+void Schedule::for3Days(Slot &s)
+{
+	float offset;
+	if (s.getNoOfHours() == 4.5)
+	{
+		offset = 1.5;
+	}
+	else
+	{
+		offset = 1.0;
+	}
+	Duration 	*d1 = new Duration(0, offset), 
+			*d2 = new Duration(Timer::TimeToFloat(Time(3, 800)), 
+				Timer::TimeToFloat(Time(3, 800)) + offset), 
+			*d3 = new Duration(Timer::TimeToFloat(Time(5, 800)), 
+				Timer::TimeToFloat(Time(5, 800)) + offset);
+
+	while (!((	Timer::isContiguous(*d1) &&
+			Timer::isContiguous(*d2) &&
+			Timer::isContiguous(*d3)) &&
+
+			(s.isAvailable(*d1) && s.isAvailable(*d2) &&
+			s.isAvailable(*d2)) &&
+
+			(Busy.isFree(*d1) && 
+			 Busy.isFree(*d2) && 
+			 Busy.isFree(*d3))))
+	{
+		if(!	Timer::isContiguous(*d1) &&
+			Timer::isContiguous(*d2) &&
+			Timer::isContiguous(*d3)) 
+		{
+			*d1 = Timer::getNextContiguous(*d1);
+			*d2 = Timer::getNextContiguous(*d2);
+			*d3 = Timer::getNextContiguous(*d3);
+		}
+
+		if(!	(s.isAvailable(*d1) && s.isAvailable(*d2) &&
+			s.isAvailable(*d2)))
+		{
+			*d1 = s.getNextAvailable(*d1);
+			*d2 = s.getNextAvailable(*d2);
+			*d3 = s.getNextAvailable(*d3);	
+		}
+
+		if(!	(Busy.isFree(*d1) && 
+			 Busy.isFree(*d2) && 
+			 Busy.isFree(*d3)))
+		{
+			*d1 = Busy.getNextFree(*d1);
+			*d2 = Busy.getNextFree(*d2);
+			*d3 = Busy.getNextFree(*d3);
+		}
+
+		if(!	(d1->End <= Timer::getEndOfDay(1)) &&
+			(d2->End <= Timer::getEndOfDay(3)) &&
+			(d3->End <= Timer::getEndOfDay(5)))
+		{
+			cout << "Scheduling Failed at " << 
+				offset * 3 << "! Sorry! " << endl;
+			cout << "d1 = " << d1->End << "\td2 = " << d2->End
+				<< "\td3 = " << d3->End << endl;
+			
+			delete(d1); delete(d2); delete(d3);
+			exit (1);
+		}
+	}
+
+	s.addLectureSlot(*d1);
+	s.addLectureSlot(*d2);
+	s.addLectureSlot(*d3);
+
+	Busy.addDuration(*d1);
+	Busy.addDuration(*d2);
+	Busy.addDuration(*d3);
+}
+
+
+void Schedule::for3_0(Slot &s)
+{
+	if (for3_0_Mon_Wed_Fri(s))
+	{
+		return;
+	}
+	if (for3_0_Tue_Thu(s))
+	{
+		return;
+	}
+	if (for3_0_Mon_Fri(s))
+	{
+		return;
+	}
+	if (for3_0_Mon_Wed(s))
+	{
+		return;
+	}
+
+	cout << "Scheduler failed at 3! Sorry!" << endl;
+	exit (1);
+}	
+			
+bool Schedule::for3_0_Mon_Wed_Fri(Slot &s)
+{
+	for3Days(s);
+}
+
+bool Schedule::for3_0_Tue_Thu(Slot &s)
+{
+	return for2Days(s, 1);
+}
+
+bool Schedule::for2Days(Slot &s, int choice)
+{
+	float offset = (s.getNoOfHours() == 3)? 1.5 : 1;
+	int day1, day2;
+	switch (choice)
+	{
+	case 1:
+		day1 = TUE; day2 = THU;
+		break;
+	case 2:
+		day1 = MON; day2 = FRI;
+		break;
+	case 3:
+		day1 = MON; day2 = WED;
+		break;
+	}
+
+	Duration 	*d1 = new Duration(Timer::TimeToFloat(Time(day1, 800)), 
+				Timer::TimeToFloat(Time(2, 800))+ offset), 
+			*d2  = new Duration(Timer::TimeToFloat(Time(day2, 800)), 
+				Timer::TimeToFloat(Time(3, 800)) + offset); 
+
+	while (!((	Timer::isContiguous(*d1) &&
+			Timer::isContiguous(*d2)) &&
+
+			(s.isAvailable(*d1) && 
+			s.isAvailable(*d2)) &&
+
+			(Busy.isFree(*d1) && 
+			 Busy.isFree(*d2))))
+	{
+		if(!	Timer::isContiguous(*d1) &&
+			Timer::isContiguous(*d2)) 
+		{
+			*d1 = Timer::getNextContiguous(*d1);
+			*d2 = Timer::getNextContiguous(*d2);
+		}
+
+		if(!	(s.isAvailable(*d1) && 
+			s.isAvailable(*d2)))
+		{
+			*d1 = s.getNextAvailable(*d1);
+			*d2 = s.getNextAvailable(*d2);
+		}
+
+		if(!	(Busy.isFree(*d1) && 
+			 Busy.isFree(*d2)))
+		{
+			*d1 = Busy.getNextFree(*d1);
+			*d2 = Busy.getNextFree(*d2);
+		}
+
+		if(!	(d1->End <= Timer::getEndOfDay(day1)) &&
+			(d2->End <= Timer::getEndOfDay(day1)))
+		{
+			delete(d1); delete(d2);
+			return false;
+		}
+	}
+
+	s.addLectureSlot(*d1);
+	s.addLectureSlot(*d2);
+	
+	Busy.addDuration(*d1);
+	Busy.addDuration(*d2);
+	return true;
+}
+bool Schedule::for3_0_Mon_Fri(Slot &s)
+{
+	return for2Days(s, 2);
+}
+
+bool Schedule::for3_0_Mon_Wed(Slot &s)
+{
+	return for2Days(s, 3);
+}
+
+void Schedule::for2_0(Slot &s)
+{
+	if (for2_0_Tue_Thu(s))
+	{
+		return;
+	}
+	if (for2_0_Mon_Fri(s))
+	{
+		return;
+	}
+	if (for2_0_Mon_Wed(s))
+	{
+		return;
+	}
+
+	cout << "Scheduler failed at 2! Sorry!" << endl;
+	exit (1);
+}
+	
+bool Schedule::for2_0_Tue_Thu(Slot &s)
+{
+	return for2Days(s, 1);
+}
+
+bool Schedule::for2_0_Mon_Fri(Slot &s)
+{
+	return for2Days(s, 2);
+}
+
+bool Schedule::for2_0_Mon_Wed(Slot &s)
+{
+	return for2Days(s, 3);
+}
+
+ostream& operator << (ostream& o, const Schedule& s)
+{
+	for (int i = 0; i < s.theSchedule.size(); i++)
+	{
+		o << endl << "Slot " << i + 1 << " : " << endl;
+		o << s.theSchedule[i];
+	}
+	return o;
+}
+
+Schedule& Schedule::operator = (const Schedule& source)
+{
+	if(Id == -1)
+	{
+		Id = source.Id;
+	}
+	theSchedule = source.theSchedule;
+	return *this;
+}
+
+extern int yylex();
+int Schedule::load(string aFileName)
+{
+	if ((fin = fopen (aFileName.c_str(), "r")) == 0)
+	{
+		cerr << "File " << aFileName << " not found!" << endl;
+		return -1;
+	}
+
+	theSchedule.clear();
+	token = yylex();
+	parseSlotList();
+	return Id;
+}
+
+void Schedule::parseSlotList()
+{
+	while (token == ID && input_string == "Slot")
+	{
+		parseSlot();
+	}
+	if (token == 0)
+	{
+		return;
+	}
+	//else something is wrong
+	cout << "Error after SlotList!" << endl;
+	exit(1);
+}
+
+void Schedule::parseSlot()
+{
+	Slot *slot = new Slot();
+
+	if ((token = yylex()) != NUMBER)
+	{
+		cerr << "Error in Slot!" << endl;
+		exit (1);
+	}
+	if ((token = yylex()) != ':')
+	{
+		cerr << "Error in Slot!" << endl;
+		exit (1);
+	}
+	if ((token = yylex()) != ID || input_string != "Subjects")
+	{
+		cerr << "Error in Slot!" << endl;
+		exit (1);
+	}
+	if ((token = yylex()) != ':')
+	{
+		cerr << "Error in Slot!" << endl;
+		exit (1);
+	}
+	parseSubList(*slot);
+	
+	if ((token = yylex()) != ':')
+	{
+		cerr << "Error in Slot!" << endl;
+		exit (1);
+	}
+	token = yylex();
+	parseLectureList(*slot);
+	
+	if ((token = yylex()) != ID || input_string != "for")
+	{
+		cerr << "Error in Slot!" << endl;
+		exit (1);
+	}
+	if ((token = yylex()) != ':')
+	{
+		cerr << "Error in Slot!" << endl;
+		exit (1);
+	}
+	token = yylex();
+	parseUnavailableList(*slot);
+
+	theSchedule.push_back(*slot);
+}
+
+void Schedule::parseSubList(Slot &aSlot)
+{
+	while (true)
+	{
+		if ((token = yylex()) != ID)
+		{
+			cerr << "Error in Subject List!" << endl;
+			exit(1);
+		}
+		else if (input_string == "Lectures")
+		{
+			return;
+		}
+		else
+		{
+			aSlot.addSubject(input_string);
+			continue;
+		}
+	}
+}
+
+void Schedule::parseLectureList(Slot &aSlot)
+{
+	if ((token == ID) && input_string == "Unavailable")
+	{
+		return;
+	}
+	parseLecture(aSlot);
+}
+
+void Schedule::parseUnavailableList(Slot &aSlot)
+{
+	if ((token == ID) && input_string == "Slot")
+	{
+		return;
+	}
+	parseUnavailable(aSlot);
+}
+
+void Schedule::parseLecture(Slot &aSlot)
+{
+	Time t1, t2;
+	switch (token)
+	{
+	case MON: case TUE: case WED: case THU: case FRI:
+		t1.WeekDay = token;
+		break;
+	default:
+		cerr << "Error in Lecture!" << endl;
+		exit(1);
+	}
+	if ((token = yylex()) != NUMBER)
+	{
+		cerr << "Error in Lecture!" << endl;
+		exit (1);
+	}
+	t1.Hour = (int)input_number;
+	if ((token = yylex()) != '-')
+	{
+			cerr << "Error in Lecture!" << endl;
+			exit (1);
+	}			
+	token = yylex();
+	switch (token)
+	{
+		case MON: case TUE: case WED: case THU: case FRI:
+			t2.WeekDay = token;
+			break;
+		default:
+			cerr << "Error in Lecture!" << endl;
+			exit (1);
+	}
+	if ((token = yylex()) != NUMBER)
+	{
+		cerr << "Error in Lecture!" << endl;
+	}
+	t2.Hour = (int)input_number;
+	
+	Duration *d = new Duration(Timer::TimeToFloat(t1), 
+			Timer::TimeToFloat(t2));
+	aSlot.addLectureSlot(*d);
+	if ((token = yylex()) == ID && input_string == "Unavailable")
+	{
+		return;
+	}
+	else 
+	{
+		parseLectureList(aSlot);
+	}
+}
+
+void Schedule::parseUnavailable(Slot &aSlot)
+{
+	Time t1, t2;
+	switch (token)
+	{
+	case MON: case TUE: case WED: case THU: case FRI:
+		t1.WeekDay = token;
+		break;
+	case 0:
+		return;
+	default:
+		cerr << "Error in Unavailable!" << endl;
+		exit(1);
+	}
+	if ((token = yylex()) != NUMBER)
+	{
+		cerr << "Error in Unavailable!" << endl;
+		exit (1);
+	}
+	t1.Hour = (int)input_number;
+	if ((token = yylex()) != '-')
+	{
+			cerr << "Error in Unavailable!" << endl;
+			exit (1);
+	}			
+	token = yylex();
+	switch (token)
+	{
+		case MON: case TUE: case WED: case THU: case FRI:
+			t2.WeekDay = token;
+			break;
+		default:
+			cerr << "Error in Unavailable!" << endl;
+			exit (1);
+	}
+	if ((token = yylex()) != NUMBER)
+	{
+		cerr << "Error in Unavailable!" << endl;
+	}
+	t2.Hour = (int)input_number;
+	
+	Duration *d = new Duration(Timer::TimeToFloat(t1), 
+			Timer::TimeToFloat(t2));
+	aSlot.addUnavailable(*d);
+	if ((token = yylex()) == ID && input_string == "Slot")
+	{
+		return;
+	}
+	else 
+	{
+		parseUnavailableList(aSlot);
+	}
+}
+#include "Timer.h"
+
+
+float Timer::HoursPerDay;
+int Timer::StartOfDay;
+int Timer::EndOfDay;
+TimeDuration Timer::Lunchbreak;
+vector<FloatDuration> Timer::breaks;	
+bool Timer::Initialised = false;	
+
+void Timer::init()
+{
+	HoursPerDay = 8.0; 
+	StartOfDay = 800; 
+	EndOfDay = 1700; 
+	Lunchbreak = TimeDuration(1300, 1.0);
+
+	for (int i = 0; i < 5; i++)
+	{
+		FloatDuration d1, d2;
+		d1.Start = i * HoursPerDay + 5;
+		d1.Length = 1;
+		breaks.push_back(d1);
+		
+		d2.Start = (i + 1) * HoursPerDay;
+		d2.Length = 0;
+		breaks.push_back(d2);
+	}
+	Initialised = true;
+}
+
+float Timer::TimeToFloat(Time aTime)
+{
+	if(!Initialised)
+	{
+		init();
+	}
+	float fltm = (aTime.WeekDay - 1) * HoursPerDay;
+	int TimeToday = aTime.Hour - StartOfDay;
+	fltm += (int)(TimeToday / 100.0);
+	fltm += (TimeToday % 100) / 60.0;
+	if (aTime.Hour >= Lunchbreak.time)
+	{
+		fltm -= Lunchbreak.length;
+	}
+}
+
+Time Timer::FloatToTime(float aFloatTime)
+{
+	if(!Initialised)
+	{
+		init();
+	}
+	Time time;
+	float fltm = aFloatTime;
+	for (time.WeekDay = 1; ; time.WeekDay++)
+	{
+		fltm = fltm - HoursPerDay;
+		if (fltm <= 0)
+		{
+			break;
+		}
+	}
+	float NoOfHoursToday = aFloatTime - (time.WeekDay - 1)*HoursPerDay;
+	time.Hour = StartOfDay + (int)NoOfHoursToday * 100 + 
+		(NoOfHoursToday - (int)NoOfHoursToday) * 60;
+	if (time.Hour >= Lunchbreak.time)
+	{
+		time.Hour += (int)Lunchbreak.length * 100 +
+			(Lunchbreak.length - (int)Lunchbreak.length) * 60;
+	}
+
+	return time;
+}
+
+Time Timer::FloatToTime(float aFloatTime, bool flag)
+{
+	if(!Initialised)
+	{
+		init();
+	}
+	Time time;
+	if ((aFloatTime / HoursPerDay) == ((int)(aFloatTime / HoursPerDay)))
+	{
+		if (flag == false)
+		{
+			time.WeekDay = (int)aFloatTime / HoursPerDay;
+			time.Hour = EndOfDay;
+			return time;
+		}
+		else
+		{
+			time.WeekDay = (int)aFloatTime / HoursPerDay + 1;
+			time.Hour = StartOfDay;
+			return time;
+		}
+
+	}	
+	float fltm = aFloatTime;
+	for (time.WeekDay = 1; ; time.WeekDay++)
+	{
+		fltm = fltm - HoursPerDay;
+		if (fltm <= 0)
+		{
+			break;
+		}
+	}
+	float NoOfHoursToday = aFloatTime - (time.WeekDay - 1)*HoursPerDay;
+	time.Hour = StartOfDay + (int)NoOfHoursToday * 100 + 
+		(NoOfHoursToday - (int)NoOfHoursToday) * 60;
+	if (time.Hour >= Lunchbreak.time)
+	{
+		time.Hour += (int)Lunchbreak.length * 100 +
+			(Lunchbreak.length - (int)Lunchbreak.length) * 60;
+	}
+
+	return time;
+}
+//Is there any break in this duration?
+bool Timer::isContiguous(Duration d)
+{
+	if(!Initialised)
+	{
+		init();
+	}
+	for (int i = 0; i < breaks.size(); i++)
+	{
+		if(d.isContained(breaks[i].Start))
+		{
+			return false;
+		}
+	}
+	return true;		
+}
+
+//Returns the next earliest duration of the same length with no breaks
+Duration Timer::getNextContiguous(Duration d)
+{
+	if(!Initialised)
+	{
+		init();
+	}
+	while (!isContiguous(d))
+	{
+		for (int i = 0; i < breaks.size(); i++)
+		{
+			if (breaks[i].Start > d.Start)
+			{
+				d.End += breaks[i].Start - d.Start;
+				d.Start = breaks[i].Start;
+				break;
+			}
+		}
+	}
+
+	return d;
+}
+
+//Returns the previous latest duration of the same length with no breaks
+Duration Timer::getPrevContiguous(Duration d) 
+{
+	if(!Initialised)
+	{
+		init();
+	}
+	while (!isContiguous(d))
+	{
+		for (int i = breaks.size() - 1; i >= 0; i--)
+		{
+			if (breaks[i].Start < d.End)
+			{
+				d.Start -= d.End - breaks[i].Start;
+				d.End = breaks[i].Start;
+				break;
+			}
+		}
+	}
+
+	return d;
+
+}
+
+ostream& operator << (ostream& o, const Time& t)
+{
+	char * days[] =
+	{
+		"mon", "tue", "wed", "thu", "fri"
+	};
+
+	o << days[t.WeekDay - 1] << ' ' << t.Hour;
+	return o;
+}
+/*
+ *  The scanner definition for Scheduler.
+ */
+
+%{
+#include <iostream.h>
+#include <stdio.h>
+#include "Global.h"
+
+extern FILE *fin; /* we read from this file */
+
+/* define YY_INPUT so we read from the FILE fin:
+ * This change makes it possible to use this scanner in
+ * the Cool compiler.
+ */
+#undef YY_INPUT
+#define YY_INPUT(buf,result,max_size) \
+	if ( (result = fread( (char*)buf, sizeof(char), max_size, fin)) < 0) \
+		YY_FATAL_ERROR( "read() in flex scanner failed");
+
+int curr_lineno;
+int verbose_flag;
+string input_string;
+float input_number;
+static int comment_level = 0;
+
+enum CommentType
+{
+	eLineComment,
+	eGenComment
+};
+
+static CommentType comment_type;
+
+%}
+
+/*
+ * Define names for regular expressions here.
+ */
+%s	COMMENT
+%s	NORMAL
+
+LINECOMMENT	--
+STARTCOMMENT	\(\*
+ENDCOMMENT	\*\)
+
+WS       [ \t\f\r\v\n]
+NL	[\n]
+DIGIT    [0-9]
+LETTER	[a-zA-Z]
+INT_CONST ({DIGIT}+)
+FLOAT	({DIGIT}+)\.({DIGIT}+)
+ID      (({DIGIT}|{LETTER})*(_)*)*
+ERROR	.
+
+%%
+
+<INITIAL>{WS}    		{}
+<INITIAL>"mon"	{	return MON;	}
+<INITIAL>"tue"	{	return TUE;	}
+<INITIAL>"wed"	{	return WED;	}
+<INITIAL>"thu"	{	return THU;	}
+<INITIAL>"fri"	{	return FRI;	}
+<INITIAL>";"	{	return	';';	}
+<INITIAL>":"	{	return	':';	}
+<INITIAL>"-"	{	return '-';	}
+<INITIAL>{FLOAT}	{	
+				sscanf(yytext, "%f", &input_number);
+				return NUMBER;	
+			}
+<INITIAL>{INT_CONST}	{	
+				sscanf(yytext, "%f", &input_number);
+				return NUMBER;	
+			}
+<INITIAL>{ID}	{	
+			input_string = yytext;
+			return ID;	
+		}
+<INITIAL>{ERROR}		{ return (ERROR); }
+
+<INITIAL>{LINECOMMENT}	{
+				comment_type = eLineComment;
+				BEGIN(COMMENT);
+		}
+				
+<INITIAL>{STARTCOMMENT}	{
+				comment_type = eGenComment;
+				BEGIN(COMMENT);	
+				comment_level ++;
+			}
+
+<INITIAL>{ENDCOMMENT}	{
+				return ERROR;
+			}
+<INITIAL><<EOF>>		{ return 0; }
+
+<COMMENT>{NL}		{ 
+				curr_lineno++; 
+				if(comment_type == eLineComment)
+				{
+					BEGIN(INITIAL);
+				}
+			}
+	
+<COMMENT>{ENDCOMMENT}	{
+				comment_level --;
+				if(comment_level == 0)
+				{
+					BEGIN(INITIAL);
+				}
+			}
+
+
+<COMMENT><<EOF>>		{
+				char * err_msg = "End of file within comment";
+				if(comment_type == eLineComment)
+				{
+					BEGIN(INITIAL); /* otherwise goes into inf. loop	*/
+					return 0;
+				}
+				BEGIN(INITIAL);
+				return ERROR;
+			}
+
+<COMMENT>{ERROR}	{}
+
+%%
+#include <stdlib.h>
+
+#include "Participant.h"
+#include "Global.h"
+#include "Schedule.h"
+#include "Period.h"
+#include "Timer.h"
+
+static int token;
+extern int yylex();
+extern string input_string;
+extern float input_number;
+
+static void SubList(vector<string>& slist)
+{
+	while ((token = yylex ()) == ID)
+	{
+		slist.push_back(input_string);
+	}
+	if (token == ';')
+	{
+		return;
+	}
+	//else something is wrong
+	cout << "Error in SubList!" << endl;
+}
+
+static void ConstrList(Period&);
+static void Constraint(Period& p)
+{
+	switch(token)
+	{
+	case MON: case TUE: case WED: case THU: case FRI:
+		Time t1, t2;
+		t1.WeekDay = token;
+		if ((token = yylex())!= NUMBER)
+		{
+			cout << "Error in Constr!" << endl;
+			exit(1);
+		}
+		t1.Hour = (int)input_number;
+		if ((token = yylex())!= '-')
+		{
+			cout << "Error in Constr!" << endl;
+			exit(1);
+		}
+		token = yylex();
+		switch (token)
+		{
+		case MON: case TUE: case WED: case THU: case FRI:
+			t2.WeekDay = token;
+			break;
+		default:
+			cout << "Error in Constr!" << endl;
+			exit(1);
+		}
+		if ((token = yylex())!= NUMBER)
+		{
+			cout << "Error in Constr!" << endl;
+			exit(1);
+		}
+		t2.Hour = (int)input_number;
+		Duration *d = new Duration(Timer::TimeToFloat(t1), 
+				Timer::TimeToFloat(t2));
+		p.addDuration(*d);
+		token = yylex(); ConstrList(p);
+		break;	
+	}
+	return;
+	
+}
+
+static void ConstrList(Period& p)
+{
+	switch (token)
+	{
+	case MON: case TUE: case WED: case THU: case FRI:
+		Constraint(p); break;
+		
+	case ';':
+		return;
+	default:
+		cout << "Error after ConstrList!" << endl;
+		exit (1);
+	}
+}
+
+static void PartList();
+static void Part()
+{
+	string s = input_string;
+	Participant *p = new Participant(s);
+	SubList(p->getSubjects());
+	token = yylex();
+	ConstrList(p->getUnavailable());
+	Participants.push_back(*p);
+	if ((token = yylex()) == ID)
+	{
+		PartList();
+	}
+}
+
+static void PartList()
+{
+	while (token == ID)
+	{
+		Part();
+	}
+	if (token == 0)
+	{
+		return;
+	}
+	//else something is wrong
+	cout << "Error after PartList!" << endl;
+	exit(1);
+}
+
+extern FILE *fin;
+void parseParticipant()
+{
+	fin = fopen("Participant.dat" , "r");
+	token = yylex();
+	PartList();
+	fclose(fin);
+}
+#include <iostream.h>
+#include <fstream.h>
+#include <stdlib.h>
+#include "Participant.h"
+#include "Subject.h"
+#include "Global.h"
+#include "Scheduler.h"
+
+Scheduler::Scheduler()
+{
+	::loadParticipants();
+	::loadSubjects();
+	::creatAssoc();
+	Schedule theSchedule;
+	theGraph.buildGraph(Subjects);
+	theGraph.colour();
+	OriginalSchedule.makeSchedule(theGraph);
+}
+
+Scheduler::~Scheduler()
+{
+	cout << "removing " << OtherSchedules.size() << " elements..." << 
+		endl;
+	OtherSchedules.clear();
+}
+
+int Scheduler::createNewSchedule(int aId)
+{
+	static int CurrentScheduleNo = 0;
+	CurrentScheduleNo++;
+	OtherSchedules[CurrentScheduleNo] = Schedule(CurrentScheduleNo);
+	if (aId == 0)
+	{
+		OtherSchedules[CurrentScheduleNo] = OriginalSchedule;
+	}
+	else
+	{
+		OtherSchedules[CurrentScheduleNo] = OtherSchedules[aId];
+	}
+	return CurrentScheduleNo;
+}
+
+void Scheduler::saveSchedule(int aId, string aFileName)
+{
+	ofstream fos (aFileName.c_str());
+	if (aId == 0)
+	{
+		fos << OriginalSchedule;
+	}
+	else
+	{
+		fos << OtherSchedules[aId];
+	}
+	fos.close();
+}
+
+int Scheduler::loadSchedule(string aFileName)
+{
+	int New = createNewSchedule(0);
+	return loadSchedule(New, aFileName);
+}
+
+int Scheduler::loadSchedule(int aId, string aFileName)
+{
+	return OtherSchedules[aId].load(aFileName);	
+}
+
+void Scheduler::removeSchedule(int aId)
+{
+	OtherSchedules.erase(aId);
+}
+
+Schedule& Scheduler::getSchedule(int aId)
+{
+	return OtherSchedules[aId];
+}
+#ifndef SCHEDULER_H
+#define SCHEDULER_H
+
+#include <map>
+#include "Schedule.h"
+#include "DepGraph.h"
+
+using namespace std;
+/*
+ * Class acting as a facade for the admin UI. This will contain
+ * multiple schedules. It will manage them and will provide the UI an
+ * interface to the UI to do the following:
+ * 	* Getting relevant information from the Scheduler
+ * 	* Validating a change made by the UI 
+ * 	* Making changes to a schedule.
+*/
+
+class Scheduler
+{
+private:
+	Schedule OriginalSchedule;
+	DepGraph theGraph;
+	map <int, Schedule> OtherSchedules;
+
+public:
+	Scheduler();
+	~Scheduler();
+	int createNewSchedule(int); //creates a new copy of the given schedule and 
+															//returns its id.
+	void saveSchedule(int, string); //saves a schedule into the file of the
+																	//given name.
+	int loadSchedule(string); //loads a schedule from the file of given name and
+										//returns its id.
+	int loadSchedule(int, string); //loads a schedule from the file of given 
+																//name into the existing schedule of
+																//given id.
+	void removeSchedule(int); //removes the schedule of the given number from the
+														//the list.
+	Schedule& getSchedule(int);	//returns the Schedule with the given id. 
+};
+#endif
