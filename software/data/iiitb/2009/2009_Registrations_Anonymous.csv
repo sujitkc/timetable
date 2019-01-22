@@ -1,0 +1,679 @@
+Student_ID|Course Number|Course Name|Semester
+5|CS 210|Advanced Operating Systems|Semester 3
+5|DB 210|Data Modeling|Semester 2
+5|DB 240|Information Networks|Semester 2
+5|NC 210|Mobile Computing with IMS Architecture|Semester 3
+5|DB 270|Multi-Agent Systems|Semester 3
+5|CS 211|Real-time Systems|Semester 3
+12|CS 210|Advanced Operating Systems|Semester 3
+12|SE 220|Design Patterns and Software Architecture|Semester 3
+12|SE 240|Fundamentals of Performance and Reliable IT Infrastructures|Semester 2
+12|NC 210|Mobile Computing with IMS Architecture|Semester 3
+12|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+12|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+13|CS 210|Advanced Operating Systems|Semester 3
+13|SE 220|Design Patterns and Software Architecture|Semester 3
+13|SE 240|Fundamentals of Performance and Reliable IT Infrastructures|Semester 2
+13|NC 210|Mobile Computing with IMS Architecture|Semester 3
+13|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+13|SE 230|Software Testing|Semester 3
+21|CS 210|Advanced Operating Systems|Semester 3
+21|CS 250|Computer Architecture|Semester 2
+21|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+21|CS 205|Mathematical Models of Computation|Semester 2
+21|NC 210|Mobile Computing with IMS Architecture|Semester 3
+21|CS 211|Real-time Systems|Semester 3
+36|NC 260|Digital Signal Processing|Semester 2
+36|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+36|NC 210|Mobile Computing with IMS Architecture|Semester 3
+36|SE 230|Software Testing|Semester 3
+36|NC 205|Wireless Access Networks|Semester 2
+36|NC 231|Wireless Communication|Semester 3
+40|DB 230|Advanced Database Management Systems|Semester 3
+40|CS 210|Advanced Operating Systems|Semester 3
+40|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+40|CS 205|Mathematical Models of Computation|Semester 2
+40|ES 240|Mechatronics|Semester 3
+40|DB 270|Multi-Agent Systems|Semester 3
+40|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+42|DB 230|Advanced Database Management Systems|Semester 3
+42|CS 210|Advanced Operating Systems|Semester 3
+42|CS 250|Computer Architecture|Semester 2
+42|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+42|CS 205|Mathematical Models of Computation|Semester 2
+42|DB 270|Multi-Agent Systems|Semester 3
+42|CS 211|Real-time Systems|Semester 3
+58|CS 210|Advanced Operating Systems|Semester 3
+58|NC 260|Digital Signal Processing|Semester 2
+58|NC 280|Information Theory and Coding|Semester 2
+58|NC 240|Mechatronics|Semester 3
+58|NC 210|Mobile Computing with IMS Architecture|Semester 3
+58|ES 230|Real-Time Embedded Communications Systems|Semester 3
+58|CS 211|Real-time Systems|Semester 3
+59|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+59|ITS 240|Intellectual Property Rights|Semester 3
+59|CS 205|Mathematical Models of Computation|Semester 2
+59|ES 240|Mechatronics|Semester 3
+59|NC 210|Mobile Computing with IMS Architecture|Semester 3
+59|DB 270|Multi-Agent Systems|Semester 3
+59|NC 230|Real-Time Embedded Communications Systems|Semester 3
+59|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+62|DB 230|Advanced Database Management Systems|Semester 3
+62|CS 210|Advanced Operating Systems|Semester 3
+62|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+62|DB 205|Mathematical Models of Computation|Semester 2
+62|DB 270|Multi-Agent Systems|Semester 3
+62|DB 250|Web Information Retrieval|Semester 2
+64|CS 210|Advanced Operating Systems|Semester 3
+64|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+64|DB 240|Information Networks|Semester 2
+64|DB 270|Multi-Agent Systems|Semester 3
+64|SE 230|Software Testing|Semester 3
+64|DB 250|Web Information Retrieval|Semester 2
+71|CS 210|Advanced Operating Systems|Semester 3
+71|DB 210|Data Modeling|Semester 2
+71|SE 220|Design Patterns and Software Architecture|Semester 3
+71|ITS 240|Intellectual Property Rights|Semester 3
+71|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+71|SE 230|Software Testing|Semester 3
+84|SE 220|Design Patterns and Software Architecture|Semester 3
+84|ITS 240|Intellectual Property Rights|Semester 3
+84|NC 240|Mechatronics|Semester 3
+84|NC 210|Mobile Computing with IMS Architecture|Semester 3
+84|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+84|CS 211|Real-time Systems|Semester 3
+84|NC 205|Wireless Access Networks|Semester 2
+87|CS 210|Advanced Operating Systems|Semester 3
+87|SE 220|Design Patterns and Software Architecture|Semester 3
+87|SE 240|Fundamentals of Performance and Reliable IT Infrastructures|Semester 2
+87|NC 210|Mobile Computing with IMS Architecture|Semester 3
+87|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+87|SE 230|Software Testing|Semester 3
+100|CS 210|Advanced Operating Systems|Semester 3
+100|NC 251|Communication in Industrial Process Automation|Semester 3
+100|NC 220|Discrete Event Systems Modeling and Simulation|Semester 2
+100|NC 240|Mechatronics|Semester 3
+100|NC 210|Mobile Computing with IMS Architecture|Semester 3
+100|SE 230|Software Testing|Semester 3
+100|NC 205|Wireless Access Networks|Semester 2
+106|CS 210|Advanced Operating Systems|Semester 3
+106|ITS 210|Dynamics of the Information Technology Industry|Semester 2
+106|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+106|DB 270|Multi-Agent Systems|Semester 3
+106|NC 297A|Special Topics - Robotics|Semester 3
+106|NC 205|Wireless Access Networks|Semester 2
+142|CS 210|Advanced Operating Systems|Semester 3
+142|SE 220|Design Patterns and Software Architecture|Semester 3
+142|DB 280|Geographic Information Systems|Semester 2
+142|DB 270|Multi-Agent Systems|Semester 3
+142|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+142|SE 230|Software Testing|Semester 3
+155|ES 260|Digital Signal Processing|Semester 2
+155|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+155|ITS 240|Intellectual Property Rights|Semester 3
+155|NC 240|Mechatronics|Semester 3
+155|NC 210|Mobile Computing with IMS Architecture|Semester 3
+155|ES 211|Real-time Systems|Semester 3
+155|NC 205|Wireless Access Networks|Semester 2
+220|SE 220|Design Patterns and Software Architecture|Semester 3
+220|DB 280|Geographic Information Systems|Semester 2
+220|NC 210|Mobile Computing with IMS Architecture|Semester 3
+220|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+220|SE 230|Software Testing|Semester 3
+225|NC 260|Digital Signal Processing|Semester 2
+225|ES 240|Mechatronics|Semester 3
+225|NC 210|Mobile Computing with IMS Architecture|Semester 3
+225|ES 230|Real-Time Embedded Communications Systems|Semester 3
+225|NC 205|Wireless Access Networks|Semester 2
+226|CS 210|Advanced Operating Systems|Semester 3
+226|SE 220|Design Patterns and Software Architecture|Semester 3
+226|DB 280|Geographic Information Systems|Semester 2
+226|NC 210|Mobile Computing with IMS Architecture|Semester 3
+226|DB 270|Multi-Agent Systems|Semester 3
+226|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+226|SE 230|Software Testing|Semester 3
+248|NC 251|Communication in Industrial Process Automation|Semester 3
+248|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+248|NC 250|Informatics in Industrial Process Automation|Semester 2
+248|NC 210|Mobile Computing with IMS Architecture|Semester 3
+248|NC 297A|Special Topics - Robotics|Semester 3
+248|NC 205|Wireless Access Networks|Semester 2
+261|CS 210|Advanced Operating Systems|Semester 3
+261|NC 260|Digital Signal Processing|Semester 2
+261|NC 280|Information Theory and Coding|Semester 2
+261|NC 240|Mechatronics|Semester 3
+261|NC 210|Mobile Computing with IMS Architecture|Semester 3
+261|ES 230|Real-Time Embedded Communications Systems|Semester 3
+261|SE 230|Software Testing|Semester 3
+274|DB 230|Advanced Database Management Systems|Semester 3
+274|CS 210|Advanced Operating Systems|Semester 3
+274|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+274|DB 240|Information Networks|Semester 2
+274|DB 205|Mathematical Models of Computation|Semester 2
+274|DB 270|Multi-Agent Systems|Semester 3
+279|DB 230|Advanced Database Management Systems|Semester 3
+279|CS 210|Advanced Operating Systems|Semester 3
+279|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+279|DB 280|Geographic Information Systems|Semester 2
+279|DB 270|Multi-Agent Systems|Semester 3
+279|CS 211|Real-time Systems|Semester 3
+279|DB 250|Web Information Retrieval|Semester 2
+288|CS 210|Advanced Operating Systems|Semester 3
+288|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+288|CS 240|Discrete Event Systems Modeling and Simulation|Semester 2
+288|ITS 240|Intellectual Property Rights|Semester 3
+288|CS 205|Mathematical Models of Computation|Semester 2
+288|DB 270|Multi-Agent Systems|Semester 3
+288|SE 230|Software Testing|Semester 3
+305|CS 201|Advanced Algorithms|Semester 2
+305|NC 240|Mechatronics|Semester 3
+305|NC 210|Mobile Computing with IMS Architecture|Semester 3
+305|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+305|SE 230|Software Testing|Semester 3
+305|NC 205|Wireless Access Networks|Semester 2
+320|CS 210|Advanced Operating Systems|Semester 3
+320|DB 210|Data Modeling|Semester 2
+320|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+320|DB 270|Multi-Agent Systems|Semester 3
+320|SE 230|Software Testing|Semester 3
+320|DB 250|Web Information Retrieval|Semester 2
+327|SE 220|Design Patterns and Software Architecture|Semester 3
+327|NC 240|Mechatronics|Semester 3
+327|NC 210|Mobile Computing with IMS Architecture|Semester 3
+327|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+327|SE 230|Software Testing|Semester 3
+327|NC 205|Wireless Access Networks|Semester 2
+329|DB 230|Advanced Database Management Systems|Semester 3
+329|CS 210|Advanced Operating Systems|Semester 3
+329|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+329|CS 205|Mathematical Models of Computation|Semester 2
+329|DB 270|Multi-Agent Systems|Semester 3
+329|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+347|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+347|CS 205|Mathematical Models of Computation|Semester 2
+347|NC 210|Mobile Computing with IMS Architecture|Semester 3
+347|SE 230|Software Testing|Semester 3
+347|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+347|NC 231|Wireless Communication|Semester 3
+352|NC 260|Digital Signal Processing|Semester 2
+352|NC 210|Mobile Computing with IMS Architecture|Semester 3
+352|NC 230|Real-Time Embedded Communications Systems|Semester 3
+352|ES 211|Real-time Systems|Semester 3
+352|NC 297A|Special Topics - Robotics|Semester 3
+352|NC 205|Wireless Access Networks|Semester 2
+353|DB 230|Advanced Database Management Systems|Semester 3
+353|DB 210|Data Modeling|Semester 2
+353|NC 240|Mechatronics|Semester 3
+353|NC 210|Mobile Computing with IMS Architecture|Semester 3
+353|SE 230|Software Testing|Semester 3
+353|NC 205|Wireless Access Networks|Semester 2
+354|CS 210|Advanced Operating Systems|Semester 3
+354|NC 260|Digital Signal Processing|Semester 2
+354|ES 240|Mechatronics|Semester 3
+354|NC 210|Mobile Computing with IMS Architecture|Semester 3
+354|NC 230|Real-Time Embedded Communications Systems|Semester 3
+354|SE 230|Software Testing|Semester 3
+354|NC 205|Wireless Access Networks|Semester 2
+357|SE 270|Design and Analysis of Safety-Critical Systems|Semester 3
+357|SE 220|Design Patterns and Software Architecture|Semester 3
+357|ES 240|Mechatronics|Semester 3
+357|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+357|ES 230|Real-Time Embedded Communications Systems|Semester 3
+357|DB 250|Web Information Retrieval|Semester 2
+358|CS 210|Advanced Operating Systems|Semester 3
+358|SE 270|Design and Analysis of Safety-Critical Systems|Semester 3
+358|SE 220|Design Patterns and Software Architecture|Semester 3
+358|CS 205|Mathematical Models of Computation|Semester 2
+358|NC 210|Mobile Computing with IMS Architecture|Semester 3
+358|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+358|CS 211|Real-time Systems|Semester 3
+379|DB 230|Advanced Database Management Systems|Semester 3
+379|CS 210|Advanced Operating Systems|Semester 3
+379|DB 210|Data Modeling|Semester 2
+379|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+379|NC 210|Mobile Computing with IMS Architecture|Semester 3
+379|DB 250|Web Information Retrieval|Semester 2
+386|CS 210|Advanced Operating Systems|Semester 3
+386|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+386|SE 220|Design Patterns and Software Architecture|Semester 3
+386|CS 205|Mathematical Models of Computation|Semester 2
+386|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+386|SE 230|Software Testing|Semester 3
+389|DB 230|Advanced Database Management Systems|Semester 3
+389|CS 210|Advanced Operating Systems|Semester 3
+389|DB 210|Data Modeling|Semester 2
+389|SE 220|Design Patterns and Software Architecture|Semester 3
+389|DB 270|Multi-Agent Systems|Semester 3
+389|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+389|DB 250|Web Information Retrieval|Semester 2
+405|DB 230|Advanced Database Management Systems|Semester 3
+405|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+405|ITS 240|Intellectual Property Rights|Semester 3
+405|DB 270|Multi-Agent Systems|Semester 3
+405|DB 290|Project (M.Tech.)|Semester 2
+405|ES 297A|Special Topics - Computer Architecture|Semester 3
+405|DB 250|Web Information Retrieval|Semester 2
+410|CS 201|Advanced Algorithms|Semester 2
+410|CS 210|Advanced Operating Systems|Semester 3
+410|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+410|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+410|ITS 240|Intellectual Property Rights|Semester 3
+410|DB 205|Mathematical Models of Computation|Semester 2
+410|CS 211|Real-time Systems|Semester 3
+410|NC 231|Wireless Communication|Semester 3
+414|NC 260|Digital Signal Processing|Semester 2
+414|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+414|NC 210|Mobile Computing with IMS Architecture|Semester 3
+414|NC 230|Real-Time Embedded Communications Systems|Semester 3
+414|NC 297A|Special Topics - Robotics|Semester 3
+414|NC 205|Wireless Access Networks|Semester 2
+420|CS 210|Advanced Operating Systems|Semester 3
+420|DB 210|Data Modeling|Semester 2
+420|SE 220|Design Patterns and Software Architecture|Semester 3
+420|NC 210|Mobile Computing with IMS Architecture|Semester 3
+420|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+420|SE 230|Software Testing|Semester 3
+430|DB 230|Advanced Database Management Systems|Semester 3
+430|CS 210|Advanced Operating Systems|Semester 3
+430|CS 250|Computer Architecture|Semester 2
+430|NC 210|Mobile Computing with IMS Architecture|Semester 3
+430|DB 270|Multi-Agent Systems|Semester 3
+430|CS 211|Real-time Systems|Semester 3
+430|DB 250|Web Information Retrieval|Semester 2
+433|CS 201|Advanced Algorithms|Semester 2
+433|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+433|CS 205|Mathematical Models of Computation|Semester 2
+433|NC 210|Mobile Computing with IMS Architecture|Semester 3
+433|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+433|SE 230|Software Testing|Semester 3
+440|CS 210|Advanced Operating Systems|Semester 3
+440|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+440|CS 240|Discrete Event Systems Modeling and Simulation|Semester 2
+440|ITS 240|Intellectual Property Rights|Semester 3
+440|CS 205|Mathematical Models of Computation|Semester 2
+440|DB 270|Multi-Agent Systems|Semester 3
+440|SE 230|Software Testing|Semester 3
+445|CS 210|Advanced Operating Systems|Semester 3
+445|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+445|DB 240|Information Networks|Semester 2
+445|ES 240|Mechatronics|Semester 3
+445|DB 270|Multi-Agent Systems|Semester 3
+445|CS 211|Real-time Systems|Semester 3
+445|DB 250|Web Information Retrieval|Semester 2
+453|DB 230|Advanced Database Management Systems|Semester 3
+453|CS 210|Advanced Operating Systems|Semester 3
+453|CS 205|Mathematical Models of Computation|Semester 2
+453|DB 270|Multi-Agent Systems|Semester 3
+453|CS 211|Real-time Systems|Semester 3
+453|ES 297A|Special Topics - Computer Architecture|Semester 3
+453|DB 250|Web Information Retrieval|Semester 2
+456|CS 210|Advanced Operating Systems|Semester 3
+456|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+456|CS 240|Discrete Event Systems Modeling and Simulation|Semester 2
+456|ITS 240|Intellectual Property Rights|Semester 3
+456|CS 205|Mathematical Models of Computation|Semester 2
+456|NC 210|Mobile Computing with IMS Architecture|Semester 3
+456|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+456|SE 230|Software Testing|Semester 3
+464|SE 220|Design Patterns and Software Architecture|Semester 3
+464|NC 210|Mobile Computing with IMS Architecture|Semester 3
+464|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+464|SE 230|Software Testing|Semester 3
+464|NC 297A|Special Topics - Robotics|Semester 3
+464|NC 205|Wireless Access Networks|Semester 2
+471|CS 201|Advanced Algorithms|Semester 2
+471|CS 210|Advanced Operating Systems|Semester 3
+471|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+471|ITS 240|Intellectual Property Rights|Semester 3
+471|NC 240|Mechatronics|Semester 3
+471|NC 230|Real-Time Embedded Communications Systems|Semester 3
+471|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+482|CS 210|Advanced Operating Systems|Semester 3
+482|SE 220|Design Patterns and Software Architecture|Semester 3
+482|DB 280|Geographic Information Systems|Semester 2
+482|NC 210|Mobile Computing with IMS Architecture|Semester 3
+482|DB 270|Multi-Agent Systems|Semester 3
+482|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+482|SE 230|Software Testing|Semester 3
+509|DB 230|Advanced Database Management Systems|Semester 3
+509|CS 210|Advanced Operating Systems|Semester 3
+509|DB 210|Data Modeling|Semester 2
+509|SE 220|Design Patterns and Software Architecture|Semester 3
+509|DB 270|Multi-Agent Systems|Semester 3
+509|SE 230|Software Testing|Semester 3
+509|DB 250|Web Information Retrieval|Semester 2
+525|SE 220|Design Patterns and Software Architecture|Semester 3
+525|ES 260|Digital Signal Processing|Semester 2
+525|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+525|ES 230|Real-Time Embedded Communications Systems|Semester 3
+525|ES 211|Real-time Systems|Semester 3
+525|SE 230|Software Testing|Semester 3
+528|CS 210|Advanced Operating Systems|Semester 3
+528|DB 210|Data Modeling|Semester 2
+528|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+528|DB 270|Multi-Agent Systems|Semester 3
+528|SE 230|Software Testing|Semester 3
+528|DB 250|Web Information Retrieval|Semester 2
+549|CS 210|Advanced Operating Systems|Semester 3
+549|SE 220|Design Patterns and Software Architecture|Semester 3
+549|SE 240|Fundamentals of Performance and Reliable IT Infrastructures|Semester 2
+549|NC 210|Mobile Computing with IMS Architecture|Semester 3
+549|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+549|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+555|SE 220|Design Patterns and Software Architecture|Semester 3
+555|ITS 210|Dynamics of the Information Technology Industry|Semester 2
+555|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+555|ITS 240|Intellectual Property Rights|Semester 3
+555|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+555|SE 230|Software Testing|Semester 3
+566|DB 230|Advanced Database Management Systems|Semester 3
+566|CS 210|Advanced Operating Systems|Semester 3
+566|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+566|DB 270|Multi-Agent Systems|Semester 3
+566|DB 290|Project (M.Tech.)|Semester 2
+566|CS 211|Real-time Systems|Semester 3
+566|DB 250|Web Information Retrieval|Semester 2
+567|DB 230|Advanced Database Management Systems|Semester 3
+567|CS 210|Advanced Operating Systems|Semester 3
+567|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+567|CS 205|Mathematical Models of Computation|Semester 2
+567|ES 240|Mechatronics|Semester 3
+567|DB 270|Multi-Agent Systems|Semester 3
+567|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+573|ITS 210|Dynamics of the Information Technology Industry|Semester 2
+573|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+573|ITS 240|Intellectual Property Rights|Semester 3
+573|ES 240|Mechatronics|Semester 3
+573|NC 297A|Special Topics - Robotics|Semester 3
+573|ITS 205|Wireless Access Networks|Semester 2
+587|DB 230|Advanced Database Management Systems|Semester 3
+587|DB 210|Data Modeling|Semester 2
+587|SE 220|Design Patterns and Software Architecture|Semester 3
+587|DB 270|Multi-Agent Systems|Semester 3
+587|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+587|SE 230|Software Testing|Semester 3
+606|CS 210|Advanced Operating Systems|Semester 3
+606|SE 220|Design Patterns and Software Architecture|Semester 3
+606|DB 280|Geographic Information Systems|Semester 2
+606|DB 270|Multi-Agent Systems|Semester 3
+606|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+606|SE 230|Software Testing|Semester 3
+610|SE 220|Design Patterns and Software Architecture|Semester 3
+610|ITS 240|Intellectual Property Rights|Semester 3
+610|NC 240|Mechatronics|Semester 3
+610|NC 210|Mobile Computing with IMS Architecture|Semester 3
+610|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+610|NC 205|Wireless Access Networks|Semester 2
+624|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+624|CS 240|Discrete Event Systems Modeling and Simulation|Semester 2
+624|CS 205|Mathematical Models of Computation|Semester 2
+624|NC 210|Mobile Computing with IMS Architecture|Semester 3
+624|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+625|DB 210|Data Modeling|Semester 2
+625|SE 220|Design Patterns and Software Architecture|Semester 3
+625|NC 210|Mobile Computing with IMS Architecture|Semester 3
+625|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+625|SE 230|Software Testing|Semester 3
+631|CS 210|Advanced Operating Systems|Semester 3
+631|SE 220|Design Patterns and Software Architecture|Semester 3
+631|SE 240|Fundamentals of Performance and Reliable IT Infrastructures|Semester 2
+631|NC 210|Mobile Computing with IMS Architecture|Semester 3
+631|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+631|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+634|DB 230|Advanced Database Management Systems|Semester 3
+634|NC 260|Digital Signal Processing|Semester 2
+634|NC 210|Mobile Computing with IMS Architecture|Semester 3
+634|NC 230|Real-Time Embedded Communications Systems|Semester 3
+634|ES 211|Real-time Systems|Semester 3
+634|NC 205|Wireless Access Networks|Semester 2
+650|SE 220|Design Patterns and Software Architecture|Semester 3
+650|ITS 240|Intellectual Property Rights|Semester 3
+650|NC 240|Mechatronics|Semester 3
+650|NC 210|Mobile Computing with IMS Architecture|Semester 3
+650|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+650|CS 211|Real-time Systems|Semester 3
+650|NC 205|Wireless Access Networks|Semester 2
+656|CS 210|Advanced Operating Systems|Semester 3
+656|SE 220|Design Patterns and Software Architecture|Semester 3
+656|NC 210|Mobile Computing with IMS Architecture|Semester 3
+656|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+656|NC 297A|Special Topics - Robotics|Semester 3
+656|NC 205|Wireless Access Networks|Semester 2
+668|SE 220|Design Patterns and Software Architecture|Semester 3
+668|NC 240|Mechatronics|Semester 3
+668|NC 210|Mobile Computing with IMS Architecture|Semester 3
+668|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+668|SE 230|Software Testing|Semester 3
+668|NC 205|Wireless Access Networks|Semester 2
+669|DB 230|Advanced Database Management Systems|Semester 3
+669|DB 210|Data Modeling|Semester 2
+669|SE 220|Design Patterns and Software Architecture|Semester 3
+669|ITS 240|Intellectual Property Rights|Semester 3
+669|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+669|SE 230|Software Testing|Semester 3
+693|DB 230|Advanced Database Management Systems|Semester 3
+693|CS 210|Advanced Operating Systems|Semester 3
+693|DB 210|Data Modeling|Semester 2
+693|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+693|DB 270|Multi-Agent Systems|Semester 3
+693|SE 230|Software Testing|Semester 3
+693|DB 250|Web Information Retrieval|Semester 2
+700|CS 210|Advanced Operating Systems|Semester 3
+700|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+700|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+700|CS 205|Mathematical Models of Computation|Semester 2
+700|NC 210|Mobile Computing with IMS Architecture|Semester 3
+700|CS 211|Real-time Systems|Semester 3
+700|NC 205|Wireless Access Networks|Semester 2
+703|CS 210|Advanced Operating Systems|Semester 3
+703|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+703|CS 205|Mathematical Models of Computation|Semester 2
+703|CS 211|Real-time Systems|Semester 3
+703|SE 230|Software Testing|Semester 3
+703|DB 250|Web Information Retrieval|Semester 2
+752|DB 230|Advanced Database Management Systems|Semester 3
+752|CS 210|Advanced Operating Systems|Semester 3
+752|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+752|CS 205|Mathematical Models of Computation|Semester 2
+752|DB 270|Multi-Agent Systems|Semester 3
+752|CS 211|Real-time Systems|Semester 3
+752|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+766|ES 250|Computer Architecture|Semester 2
+766|ES 270|Design Techniques for CMOS Integrated Circuits|Semester 2
+766|ES 230|Real-Time Embedded Communications Systems|Semester 3
+766|ES 211|Real-time Systems|Semester 3
+766|ES 297A|Special Topics - Computer Architecture|Semester 3
+766|NC 297A|Special Topics - Robotics|Semester 3
+777|CS 210|Advanced Operating Systems|Semester 3
+777|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+777|CS 240|Discrete Event Systems Modeling and Simulation|Semester 2
+777|ITS 240|Intellectual Property Rights|Semester 3
+777|CS 205|Mathematical Models of Computation|Semester 2
+777|NC 210|Mobile Computing with IMS Architecture|Semester 3
+777|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+777|SE 230|Software Testing|Semester 3
+783|CS 210|Advanced Operating Systems|Semester 3
+783|NC 251|Communication in Industrial Process Automation|Semester 3
+783|ES 250|Computer Architecture|Semester 2
+783|ES 270|Design Techniques for CMOS Integrated Circuits|Semester 2
+783|ES 240|Mechatronics|Semester 3
+783|ES 211|Real-time Systems|Semester 3
+783|ES 297A|Special Topics - Computer Architecture|Semester 3
+787|NC 260|Digital Signal Processing|Semester 2
+787|ES 240|Mechatronics|Semester 3
+787|NC 210|Mobile Computing with IMS Architecture|Semester 3
+787|ES 211|Real-time Systems|Semester 3
+787|SE 230|Software Testing|Semester 3
+787|NC 205|Wireless Access Networks|Semester 2
+789|NC 260|Digital Signal Processing|Semester 2
+789|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+789|ITS 240|Intellectual Property Rights|Semester 3
+789|NC 210|Mobile Computing with IMS Architecture|Semester 3
+789|NC 230|Real-Time Embedded Communications Systems|Semester 3
+789|NC 205|Wireless Access Networks|Semester 2
+821|DB 210|Data Modeling|Semester 2
+821|SE 220|Design Patterns and Software Architecture|Semester 3
+821|NC 210|Mobile Computing with IMS Architecture|Semester 3
+821|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+821|CS 211|Real-time Systems|Semester 3
+821|SE 230|Software Testing|Semester 3
+843|CS 210|Advanced Operating Systems|Semester 3
+843|DB 210|Data Modeling|Semester 2
+843|SE 220|Design Patterns and Software Architecture|Semester 3
+843|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+843|CS 211|Real-time Systems|Semester 3
+843|SE 230|Software Testing|Semester 3
+843|NC 297A|Special Topics - Robotics|Semester 3
+857|DB 230|Advanced Database Management Systems|Semester 3
+857|CS 210|Advanced Operating Systems|Semester 3
+857|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+857|CS 205|Mathematical Models of Computation|Semester 2
+857|ES 240|Mechatronics|Semester 3
+857|DB 270|Multi-Agent Systems|Semester 3
+857|CS 297B|Special Topics - Artificial Intelligence|Semester 2
+861|NC 250|Informatics in Industrial Process Automation|Semester 2
+861|ITS 240|Intellectual Property Rights|Semester 3
+861|NC 240|Mechatronics|Semester 3
+861|NC 210|Mobile Computing with IMS Architecture|Semester 3
+861|SE 230|Software Testing|Semester 3
+861|NC 205|Wireless Access Networks|Semester 2
+884|CS 210|Advanced Operating Systems|Semester 3
+884|DB 210|Data Modeling|Semester 2
+884|SE 220|Design Patterns and Software Architecture|Semester 3
+884|NC 210|Mobile Computing with IMS Architecture|Semester 3
+884|DB 270|Multi-Agent Systems|Semester 3
+884|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+884|CS 211|Real-time Systems|Semester 3
+884|SE 230|Software Testing|Semester 3
+885|NC 251|Communication in Industrial Process Automation|Semester 3
+885|NC 250|Informatics in Industrial Process Automation|Semester 2
+885|NC 210|Mobile Computing with IMS Architecture|Semester 3
+885|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+885|NC 297A|Special Topics - Robotics|Semester 3
+885|NC 205|Wireless Access Networks|Semester 2
+900|NC 251|Communication in Industrial Process Automation|Semester 3
+900|ES 270|Design Techniques for CMOS Integrated Circuits|Semester 2
+900|NC 250|Informatics in Industrial Process Automation|Semester 2
+900|NC 240|Mechatronics|Semester 3
+900|SE 230|Software Testing|Semester 3
+900|NC 297A|Special Topics - Robotics|Semester 3
+910|NC 260|Digital Signal Processing|Semester 2
+910|ES 240|Mechatronics|Semester 3
+910|NC 210|Mobile Computing with IMS Architecture|Semester 3
+910|ES 211|Real-time Systems|Semester 3
+910|SE 230|Software Testing|Semester 3
+910|NC 205|Wireless Access Networks|Semester 2
+914|CS 210|Advanced Operating Systems|Semester 3
+914|NC 260|Digital Signal Processing|Semester 2
+914|ES 240|Mechatronics|Semester 3
+914|NC 210|Mobile Computing with IMS Architecture|Semester 3
+914|ES 230|Real-Time Embedded Communications Systems|Semester 3
+914|NC 297A|Special Topics - Robotics|Semester 3
+914|NC 205|Wireless Access Networks|Semester 2
+915|DB 230|Advanced Database Management Systems|Semester 3
+915|CS 210|Advanced Operating Systems|Semester 3
+915|CS 205|Mathematical Models of Computation|Semester 2
+915|NC 210|Mobile Computing with IMS Architecture|Semester 3
+915|DB 270|Multi-Agent Systems|Semester 3
+915|DB 250|Web Information Retrieval|Semester 2
+919|CS 210|Advanced Operating Systems|Semester 3
+919|SE 220|Design Patterns and Software Architecture|Semester 3
+919|DB 280|Geographic Information Systems|Semester 2
+919|NC 210|Mobile Computing with IMS Architecture|Semester 3
+919|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+919|SE 230|Software Testing|Semester 3
+921|DB 230|Advanced Database Management Systems|Semester 3
+921|DB 210|Data Modeling|Semester 2
+921|SE 220|Design Patterns and Software Architecture|Semester 3
+921|ITS 240|Intellectual Property Rights|Semester 3
+921|NC 210|Mobile Computing with IMS Architecture|Semester 3
+921|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+921|CS 211|Real-time Systems|Semester 3
+921|SE 230|Software Testing|Semester 3
+929|CS 210|Advanced Operating Systems|Semester 3
+929|SE 220|Design Patterns and Software Architecture|Semester 3
+929|NC 210|Mobile Computing with IMS Architecture|Semester 3
+929|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+929|DB 250|Web Information Retrieval|Semester 2
+954|NC 260|Digital Signal Processing|Semester 2
+954|ES 240|Mechatronics|Semester 3
+954|NC 210|Mobile Computing with IMS Architecture|Semester 3
+954|NC 230|Real-Time Embedded Communications Systems|Semester 3
+954|SE 230|Software Testing|Semester 3
+954|NC 205|Wireless Access Networks|Semester 2
+961|SE 220|Design Patterns and Software Architecture|Semester 3
+961|CS 205|Mathematical Models of Computation|Semester 2
+961|ES 240|Mechatronics|Semester 3
+961|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+961|SE 230|Software Testing|Semester 3
+961|NC 297A|Special Topics - Robotics|Semester 3
+963|NC 251|Communication in Industrial Process Automation|Semester 3
+963|NC 260|Digital Signal Processing|Semester 2
+963|ITS 240|Intellectual Property Rights|Semester 3
+963|NC 240|Mechatronics|Semester 3
+963|NC 210|Mobile Computing with IMS Architecture|Semester 3
+963|DB 270|Multi-Agent Systems|Semester 3
+963|NC 205|Wireless Access Networks|Semester 2
+967|ES 250|Computer Architecture|Semester 2
+967|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+967|ES 270|Design Techniques for CMOS Integrated Circuits|Semester 2
+967|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+967|ES 240|Mechatronics|Semester 3
+980|CS 210|Advanced Operating Systems|Semester 3
+980|DB 210|Data Modeling|Semester 2
+980|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+980|DB 240|Information Networks|Semester 2
+980|NC 210|Mobile Computing with IMS Architecture|Semester 3
+980|DB 270|Multi-Agent Systems|Semester 3
+980|CS 211|Real-time Systems|Semester 3
+980|SE 230|Software Testing|Semester 3
+982|SE 220|Design Patterns and Software Architecture|Semester 3
+982|ITS 240|Intellectual Property Rights|Semester 3
+982|NC 210|Mobile Computing with IMS Architecture|Semester 3
+982|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+982|SE 230|Software Testing|Semester 3
+982|NC 205|Wireless Access Networks|Semester 2
+983|CS 210|Advanced Operating Systems|Semester 3
+983|SE 220|Design Patterns and Software Architecture|Semester 3
+983|SE 240|Fundamentals of Performance and Reliable IT Infrastructures|Semester 2
+983|NC 210|Mobile Computing with IMS Architecture|Semester 3
+983|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+983|SE 340|Performance, Reliability Analysis and Optimization of Contemporary Infrastructures|Semester 3
+993|NC 251|Communication in Industrial Process Automation|Semester 3
+993|NC 260|Digital Signal Processing|Semester 2
+993|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+993|NC 210|Mobile Computing with IMS Architecture|Semester 3
+993|NC 230|Real-Time Embedded Communications Systems|Semester 3
+993|NC 205|Wireless Access Networks|Semester 2
+994|SE 220|Design Patterns and Software Architecture|Semester 3
+994|ITS 210|Dynamics of the Information Technology Industry|Semester 2
+994|ITS 220|Economic and Social Impacts of Information Technology|Semester 3
+994|ITS 240|Intellectual Property Rights|Semester 3
+994|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+994|SE 230|Software Testing|Semester 3
+3532|NC 270|Design Techniques for CMOS Integrated Circuits|Semester 2
+3532|NC 260|Digital Signal Processing|Semester 2
+3532|ES 240|Mechatronics|Semester 3
+3532|NC 210|Mobile Computing with IMS Architecture|Semester 3
+3532|ES 230|Real-Time Embedded Communications Systems|Semester 3
+3532|ES 211|Real-time Systems|Semester 3
+3536|CS 210|Advanced Operating Systems|Semester 3
+3536|CS 270|Design and Analysis of Safety-Critical Systems|Semester 3
+3536|ITS 240|Intellectual Property Rights|Semester 3
+3536|CS 205|Mathematical Models of Computation|Semester 2
+3536|NC 210|Mobile Computing with IMS Architecture|Semester 3
+3536|CS 211|Real-time Systems|Semester 3
+3536|SE 230|Software Testing|Semester 3
+3536|DB 250|Web Information Retrieval|Semester 2
+4646|DB 210|Data Modeling|Semester 2
+4646|SE 220|Design Patterns and Software Architecture|Semester 3
+4646|ITS 240|Intellectual Property Rights|Semester 3
+4646|NC 210|Mobile Computing with IMS Architecture|Semester 3
+4646|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+4646|SE 230|Software Testing|Semester 3
+8658|CS 210|Advanced Operating Systems|Semester 3
+8658|SE 220|Design Patterns and Software Architecture|Semester 3
+8658|DB 280|Geographic Information Systems|Semester 2
+8658|DB 270|Multi-Agent Systems|Semester 3
+8658|SE 210|OOAD, UML, and Intro to Web 2.0|Semester 2
+8658|SE 230|Software Testing|Semester 3
