@@ -6,38 +6,23 @@ import random
 
 from string import *
 
+periodsPerDay = 4
+daysPerWeek = 6
 
-
-heavy = (3, 2)
-light = (2, 3)
-vheavy = (3, 3)
-vlight = (2, 2)
-
-periodsPerDay = 8
-loads = (heavy, light, vheavy, vlight)
+goodSlots = [(x, y) for x in range(daysPerWeek) for y in range(daysPerWeek) if x != y and x < y]
 
 dirName = ''
 participants = []
 courses = []
 slots = []
 
-courseLoads = {}
 resourceMap = {}
 
-def newCourse(id, load):
-	return (id, load)
+def newCourse(id):
+	return (id)
 
 def getCourseId(s):
 	return s[0]
-
-def getCourseLoadType(s):
-	return s[1]
-
-def getLoadDuration(l):
-	return l[0]
-
-def getLoadGroupSize(l):
-	return l[1]
 
 def newSlot(day, period):
 	return (day, period)
@@ -48,33 +33,7 @@ def getSlotDay(s):
 def getSlotPeriod(s):
 	return s[1]
 
-def readCourses(fileName):
-	if(not os.path.isfile(fileName)):
-		print fileName + ": file does not exist."
-		sys.exit(1)
-
-	fin = open(fileName, 'r')
-	courseId = 0
-	courses = []
-	while(True):
-		line = fin.readline()
-		if(line == ''):
-			break
-		else:
-			sline = strip(line)
-			if(sline == 'vlight'):
-				courses.append(newCourse(courseId, vlight))
-			elif(sline == 'light'):	
-				courses.append(newCourse(courseId, light))
-			elif(sline == 'heavy'):		
-				courses.append(newCourse(courseId, heavy))
-			elif(sline == 'vheavy'):		
-				courses.append(newCourse(courseId, vheavy))
-		courseId = courseId + 1
-	fin.close()
-	return courses
-	
-def readResourceMap(fileName, participants):
+def readResourceMap(fileName):
 	if(not os.path.isfile(fileName)):
 		print fileName + ": file does not exist."
 		sys.exit(1)
@@ -89,13 +48,17 @@ def readResourceMap(fileName, participants):
 			break
 		else:
 			fields = str.split(line, "|")
-			numberOfCourses = len(fields)
-			for i in range(len(fields)):
-				if(strip(fields[i]) == 'Yes'):
-					if(numberOfParticipants not in resourceMap):
-						resourceMap[numberOfParticipants] = []
-					resourceMap[numberOfParticipants].append(courses[i])
-		numberOfParticipants = numberOfParticipants + 1
+			p1 = strip(fields[0])
+			course = strip(fields[1])
+			p2 = strip(fields[2])
+			if course not in courses:
+				courses.append(course)
+			if course not in resourceMap:
+				resourceMap[course] = []
+			if p1 not in resourceMap[course]:
+				resourceMap[course].append(p1)
+			if p2 not in resourceMap[course]:
+				resourceMap[course].append(p2)
 	fin.close()
 	return resourceMap
 
@@ -115,26 +78,25 @@ def setup():
 		sys.exit(1)
 
 
-	slots = [newSlot(day, period) for day in range(5) for period in range(periodsPerDay)]
-	courses = readCourses(dirName + '/courses.csv')
-	resourceMap = readResourceMap(dirName + '/resourcemap.csv', participants)
+	slots = [newSlot(day, period) for day in range(daysPerWeek) for period in range(periodsPerDay)]
+	resourceMap = readResourceMap(dirName + '/resourcemap.csv')
 
-def makeGraph():
+def makeGraph(resourceMap):
 	graph = {}
-	def haveCommonParticipant(s1, s2):
-		for p in range(len(participants)):
-			if(s1 in resourceMap[p] and s2 in resourceMap[p]):
+	def haveCommonParticipant(c1, c2):
+		for p in resourceMap[c1]:
+			if p in resourceMap[c2]:
 				return True
 		return False
 
-	for s in courses:
-		graph[s] = []
-	for s1 in courses:
-		for s2 in courses:
-			if(s2 not in graph[s1]):
-				if(haveCommonParticipant(s1, s2)):
-					graph[s1].append(s2)
-					graph[s2].append(s1)
+	for c in courses:
+		graph[c] = []
+	for c1 in courses:
+		for c2 in courses:
+			if(c2 not in graph[c1]):
+				if(haveCommonParticipant(c1, c2)):
+					graph[c1].append(c2)
+					graph[c2].append(c1)
 	return graph
 
 def areNeighbours(n1, n2, g):
@@ -144,17 +106,8 @@ def getCoursesForSlot(slot, schedule):
 	return [c for c in schedule if slot in schedule[c]]
 
 def schedule(graph):
-	global participants
-	global courses
 	global slots
-	global courseLoads
 	global resourceMap
-
-	goodChoices = {}
-	goodChoices[heavy] = ((0, 2), (1, 3), (2, 4))
-	goodChoices[light] = ((0, 2, 4), (1, 2, 3), (0, 1, 2), (2, 3, 4))
-	goodChoices[vheavy] = ((0, 2, 4), (1, 2, 3), (0, 1, 2), (2, 3, 4))
-	goodChoices[vlight] = ((0, 2), (1, 3), (2, 4))
 
 	empty = {}
 	for course in courses:
@@ -166,7 +119,7 @@ def schedule(graph):
 		def isSlotAvailable(slot):
 			day = getSlotDay(slot)
 			period = getSlotPeriod(slot)
-			groupSize = getLoadGroupSize(getCourseLoadType(course))
+			groupSize = 1
 			if(period > (periodsPerDay - groupSize)):
 				return False
 
@@ -178,15 +131,13 @@ def schedule(graph):
 			return True
 
 		def isSlotGroupAvailable(slotGroup):
-			groupSize = getLoadGroupSize(getCourseLoadType(course))
 			for slot in slotGroup:
 				if(not isSlotAvailable(slot)):
 					return False
 			return True
 		
 		def getPermittedSlotGroups():
-			loadType = getCourseLoadType(course)
-			choices = goodChoices[loadType]
+			choices = goodSlots
 			goodSlotGroups = []
 			for choice in choices:
 				for period in range(periodsPerDay):
@@ -197,7 +148,6 @@ def schedule(graph):
 						goodSlotGroups.append(l2)
 			random.shuffle(goodSlotGroups)
 			return goodSlotGroups
-
 		new = {}
 		for c in sched:
 			new[c] = sched[c]
@@ -205,17 +155,18 @@ def schedule(graph):
 		if(permitted == []):
 			return empty
 		if(index == len(courses) - 1):
-			new[course] = [newSlot(getSlotDay(p), getSlotPeriod(p) + i) for p in permitted[0] for i in range(getLoadDuration(getCourseLoadType(course)))]
+			new[course] = [newSlot(getSlotDay(p), getSlotPeriod(p) + i) for p in permitted[0] for i in range(1)]
 			return new
 		for slotGroup in permitted:
-			new[course] = [newSlot(getSlotDay(p), getSlotPeriod(p) + i) for p in slotGroup for i in range(getLoadDuration(getCourseLoadType(course)))]
+			new[course] = [newSlot(getSlotDay(p), getSlotPeriod(p) + i) for p in slotGroup for i in range(1)]
 			result = satisfy(index + 1, new)
 			if(result != empty):
 				return result
 		return empty
 				
 	theSchedule = {c : [] for c in courses}
-	return satisfy(0, theSchedule)
+	theSchedule = satisfy(0, theSchedule)
+	return theSchedule
 
 def printResourceMap(matrix):
 	for p in participants:
@@ -227,7 +178,7 @@ def printResourceMap(matrix):
 		print
 
 def printSchedule(schedule):
-	for day in range(5):
+	for day in range(daysPerWeek):
 		periodNumber = 0
 		for period in range(periodsPerDay):
 			slot = newSlot(day, period)
@@ -237,7 +188,7 @@ def printSchedule(schedule):
 			else:
 				courseNumber = 0
 				for course in clist:
-					print str(getCourseId(course)),
+					print course,
 					if(courseNumber != len(clist) - 1):
 						print ', ',
 					courseNumber = courseNumber + 1
@@ -249,7 +200,7 @@ def printSchedule(schedule):
 
 def printScheduleToFile(schedule, fileName):
 	fout = open(fileName, 'w')
-	for day in range(5):
+	for day in range(daysPerWeek):
 		periodNumber = 0
 		for period in range(periodsPerDay):
 			slot = newSlot(day, period)
@@ -259,7 +210,7 @@ def printScheduleToFile(schedule, fileName):
 			else:
 				courseNumber = 0
 				for course in clist:
-					fout.write(str(getCourseId(course)))
+					fout.write(course)
 					if(courseNumber != len(courses) - 1):
 						fout.write(', ')
 					courseNumber = courseNumber + 1
@@ -270,7 +221,13 @@ def printScheduleToFile(schedule, fileName):
 	fout.close()
 
 setup()
-g = makeGraph()
+print str(len(resourceMap)) + ' courses:'
+print dict.keys(resourceMap)
+g = makeGraph(resourceMap)
 sched = schedule(g)
+if(sched == empty):
+	print "Couldn't find solution."
+else:
+	print sched
 printSchedule(sched)
 printScheduleToFile(sched, dirName + '/sch.csv')
